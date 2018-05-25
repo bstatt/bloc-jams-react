@@ -17,6 +17,7 @@ class Album extends Component {
 
     this.audioElement = document.createElement('audio');
     this.audioElement.src = album.songs[0].audioSrc;
+    // this.icon = document.querySelector('.song-number');
   }
 
   play() {
@@ -36,11 +37,15 @@ class Album extends Component {
 
   handleSongClick(song) {
     const isSameSong = this.state.currentSong === song;
+    const icon = document.querySelector('.song-number');
+
     if (this.state.isPlaying && isSameSong) {
       this.pause();
+      icon.innerHTML = '<span class="ion-play"></span>';
     } else {
       if (!isSameSong) { this.setSong(song); }
       this.play();
+      icon.innerHTML = '<span class="ion-pause"></span>';
     }
   }
 
@@ -63,10 +68,10 @@ class Album extends Component {
           </colgroup>
           <tbody>
           {this.state.album.songs.map( (song, index) =>
-            <tr className="song" key={index} onClick={() => this.handleSongClick(song)} >
-             <td>{index + 1}</td>
-             <td>{this.state.album.songs[index].title}</td>
-             <td>{this.state.album.songs[index].duration}</td>
+            <tr className="song" key={index} onClick={() => this.handleSongClick(song)}>
+             <td className="song-number"></td>
+             <td className="song-title">{song.title}</td>
+             <td className="song-duration">{song.duration}</td>
             </tr>
           )}
           </tbody>
