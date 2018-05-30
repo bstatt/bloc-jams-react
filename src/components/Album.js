@@ -13,12 +13,11 @@ class Album extends Component {
       album: album,
       currentSong: album.songs[0],
       isPlaying: false,
-      tdClass: ''
+      iconClasses: []
     };
 
     this.audioElement = document.createElement('audio');
     this.audioElement.src = album.songs[0].audioSrc;
-    // this.icon = document.querySelector('.song-number');
   }
 
   play() {
@@ -41,24 +40,28 @@ class Album extends Component {
 
     if (this.state.isPlaying && isSameSong) {
       this.pause();
-      this.setState({tdClass: 'ion-play'})
     } else {
-      if (!isSameSong) { this.setSong(song); }
+      if (!isSameSong) {
+        this.setSong(song);
+      }
       this.play();
-      this.setState({tdClass: 'ion-pause'})
     }
   }
 
-  onMouseEnter(song, index) {
-    this.setState({tdClass: 'ion-play'});
-  }
-
-  onMouseLeave(index) {
-    if(this.state.isPlaying === true) {
-      this.setState({tdClass : 'ion-pause'})
+  toggleIcons(song, index) {
+    var iconClasses = this.state.iconClasses;
+    this.setState({iconClasses: iconClasses});
+    if(this.state.isPlaying && this.state.currentSong === song) {
+      iconClasses[index] = 'ion-pause';
     } else {
-      this.setState({tdClass : 'song-number'})
+      iconClasses[index] = 'ion-play';
     }
+  }
+
+  removeIcons(song, index) {
+    var iconClasses = this.state.iconClasses;
+    iconClasses[index]= 'song-number';
+    this.setState({iconClasses: iconClasses});
   }
 
   render() {
@@ -80,8 +83,8 @@ class Album extends Component {
           </colgroup>
           <tbody>
           {this.state.album.songs.map( (song, index) =>
-            <tr className="song" key={index} onClick={() => this.handleSongClick(song)} onMouseEnter={() => this.onMouseEnter(song, index)} onMouseLeave={() => this.onMouseLeave(index)}>
-             <td className={this.state.tdClass}>{index + 1}</td>
+            <tr className="song" key={index} onClick={() => this.handleSongClick(song)} onMouseEnter={() => this.toggleIcons(song, index)} onMouseLeave={() => this.removeIcons(song, index)}>
+             <td className={this.state.iconClasses[index]}>{index + 1}</td>
              <td className="song-title">{song.title}</td>
              <td className="song-duration">{song.duration}</td>
             </tr>
