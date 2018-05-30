@@ -13,7 +13,7 @@ class Album extends Component {
       album: album,
       currentSong: album.songs[0],
       isPlaying: false,
-      iconClasses: []
+      iconClasses: ['song-number']
     };
 
     this.audioElement = document.createElement('audio');
@@ -35,7 +35,7 @@ class Album extends Component {
     this.setState({ currentSong: song });
   }
 
-  handleSongClick(song) {
+  handleSongClick(song, index) {
     const isSameSong = this.state.currentSong === song;
 
     if (this.state.isPlaying && isSameSong) {
@@ -50,18 +50,24 @@ class Album extends Component {
 
   toggleIcons(song, index) {
     var iconClasses = this.state.iconClasses;
-    this.setState({iconClasses: iconClasses});
+
     if(this.state.isPlaying && this.state.currentSong === song) {
       iconClasses[index] = 'ion-pause';
     } else {
       iconClasses[index] = 'ion-play';
     }
+    this.setState({iconClasses : iconClasses})
   }
 
   removeIcons(song, index) {
     var iconClasses = this.state.iconClasses;
-    iconClasses[index]= 'song-number';
-    this.setState({iconClasses: iconClasses});
+
+    if(this.state.isPlaying && this.state.currentSong === song) {
+      iconClasses[index] = 'ion-pause';
+    } else {
+      iconClasses[index] = 'song-number';
+    }
+    this.setState({iconClasses : iconClasses})
   }
 
   render() {
