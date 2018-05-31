@@ -13,7 +13,7 @@ class Album extends Component {
       album: album,
       currentSong: album.songs[0],
       isPlaying: false,
-      iconClasses: ['song-number']
+      hover: [false]
     };
 
     this.audioElement = document.createElement('audio');
@@ -48,26 +48,35 @@ class Album extends Component {
     }
   }
 
-  toggleIcons(song, index) {
-    var iconClasses = this.state.iconClasses;
-
-    if(this.state.isPlaying && this.state.currentSong === song) {
-      iconClasses[index] = 'ion-pause';
-    } else {
-      iconClasses[index] = 'ion-play';
-    }
-    this.setState({iconClasses : iconClasses})
+  handleMouseEnter(song, index) {
+    var hover = this.state.hover;
+    hover[index] = true;
+    this.setState({
+      hover: hover
+    })
   }
 
-  removeIcons(song, index) {
-    var iconClasses = this.state.iconClasses;
+  handleMouseLeave(song, index) {
+    var hover = this.state.hover;
+    hover[index] = false;
+    this.setState({
+      hover: hover
+    })
+  }
 
+  renderIcons(song, index) {
+    let status = this.state.hover;
+    let hoverStatus = status[index] === true;
+    //if song is playing, show a pause icon
     if(this.state.isPlaying && this.state.currentSong === song) {
-      iconClasses[index] = 'ion-pause';
+      return <td className="ion-pause"></td>;
+      //if the current song is not playing, show a play icon
+    } else if(!this.state.isPlaying && !this.state.currentSong === song || hoverStatus){
+      return <td className="ion-play"></td>;
+      //otherwise, show the song number
     } else {
-      iconClasses[index] = 'song-number';
+      return <td className="song-number">{index + 1}</td>;
     }
-    this.setState({iconClasses : iconClasses})
   }
 
   render() {
@@ -89,8 +98,8 @@ class Album extends Component {
           </colgroup>
           <tbody>
           {this.state.album.songs.map( (song, index) =>
-            <tr className="song" key={index} onClick={() => this.handleSongClick(song)} onMouseEnter={() => this.toggleIcons(song, index)} onMouseLeave={() => this.removeIcons(song, index)}>
-             <td className={this.state.iconClasses[index]}>{index + 1}</td>
+            <tr className="song" key={index} onClick={() => this.handleSongClick(song)} onMouseEnter={() => this.handleMouseEnter(song, index)} onMouseLeave={() => this.handleMouseLeave(song, index)}>
+             {this.renderIcons(song, index)}
              <td className="song-title">{song.title}</td>
              <td className="song-duration">{song.duration}</td>
             </tr>
