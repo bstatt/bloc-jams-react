@@ -90,6 +90,17 @@ class Album extends Component {
     this.setState({currentTime : newTime})
   }
 
+  formatTime(time) {
+    let minutes = Math.floor(time / 60);
+    let seconds = Math.round(time - minutes * 60);
+
+    if (isNaN(time)){
+      return "-:--"
+    } else {
+      return minutes + (9 < seconds ? ':':':0') + seconds;
+    }
+  }
+
   handleVolumeChange(e) {
     const newVolume = e.target.value;
     this.audioElement.volume = newVolume;
@@ -157,7 +168,7 @@ class Album extends Component {
             <tr className="song" key={index} onClick={() => this.handleSongClick(song)} onMouseEnter={() => this.handleMouseEnter(song, index)} onMouseLeave={() => this.handleMouseLeave(song, index)}>
              {this.renderIcons(song, index)}
              <td className="song-title">{song.title}</td>
-             <td className="song-duration">{song.duration}</td>
+             <td className="song-duration">{this.formatTime(song.duration)}</td>
             </tr>
           )}
           </tbody>
@@ -173,6 +184,7 @@ class Album extends Component {
           handleNextClick={() => this.handleNextClick()}
           handleTimeChange={(e) => this.handleTimeChange(e) }
           handleVolumeChange={(e) => this.handleVolumeChange(e)}
+          formatTime={(time) => this.formatTime(time)}
         />
       </section>
     );
