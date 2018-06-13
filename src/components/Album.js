@@ -156,8 +156,23 @@ class Album extends Component {
             <h2 className="artist">{this.state.album.artist}</h2>
             <div id="release-info">{this.state.album.releaseInfo}</div>
           </div>
+        </div>
+        <div className="container">
           <div className="row">
             <div className="col">
+            <PlayerBar className="player-bar"
+              isPlaying={this.state.isPlaying}
+              currentSong={this.state.currentSong}
+              currentTime={this.audioElement.currentTime}
+              duration={this.audioElement.duration}
+              currentVolume={this.audioElement.currentVolume}
+              handleSongClick={() => this.handleSongClick(this.state.currentSong)}
+              handlePrevClick={() => this.handlePrevClick()}
+              handleNextClick={() => this.handleNextClick()}
+              handleTimeChange={(e) => this.handleTimeChange(e) }
+              handleVolumeChange={(e) => this.handleVolumeChange(e)}
+              formatTime={(time) => this.formatTime(time)}
+            />
               <table id="song-list">
                 <colgroup>
                   <col id="song-number-column" />
@@ -181,19 +196,6 @@ class Album extends Component {
           </div>
         </div>
         </section>
-        <PlayerBar
-          isPlaying={this.state.isPlaying}
-          currentSong={this.state.currentSong}
-          currentTime={this.audioElement.currentTime}
-          duration={this.audioElement.duration}
-          currentVolume={this.audioElement.currentVolume}
-          handleSongClick={() => this.handleSongClick(this.state.currentSong)}
-          handlePrevClick={() => this.handlePrevClick()}
-          handleNextClick={() => this.handleNextClick()}
-          handleTimeChange={(e) => this.handleTimeChange(e) }
-          handleVolumeChange={(e) => this.handleVolumeChange(e)}
-          formatTime={(time) => this.formatTime(time)}
-        />
       </section>
     );
   }

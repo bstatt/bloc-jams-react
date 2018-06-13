@@ -36,15 +36,17 @@
 }
 
 .library {
-  background: #fdcc52;
+  /* background: #fdcc52; */
   padding-top: 50px;
   padding-bottom: 100px;
 }
 
 .jumbotron {
-  background: url(https://images.pexels.com/photos/532563/pexels-photo-532563.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
+  background: url(https://images.pexels.com/photos/158826/structure-light-led-movement-158826.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
   color: white;
   text-align: left;
+  margin-top: -50px;
+  height: 600px;
 }
 
 .selling-points {
@@ -62,4 +64,26 @@
 .btn-jumbotron:hover {
   background: #fdcc52;
   color: white;
+}
+
+.time-control {
+  display: inline-block;
+}
+
+.player-bar section {
+  display: inline-block;
+  margin: 10px;
+}
+
+.player-bar {
+  background: #fdcc52;
+}
+
+header {
+  background: transparent;
+  color: white;
+}
+
+.jumbotron .container {
+  margin-top: 100px;
 }
