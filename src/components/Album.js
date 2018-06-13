@@ -150,29 +150,37 @@ class Album extends Component {
     return(
       <section className="album">
         <section id="album-info">
-          <img id="album-cover-art" src={this.state.album.albumCover} alt={this.state.album.title}/>
-          <div className="album-details">
+        <div className="container">
+          <div className="row album-info">
             <h1 id="album-title">{this.state.album.title}</h1>
             <h2 className="artist">{this.state.album.artist}</h2>
             <div id="release-info">{this.state.album.releaseInfo}</div>
           </div>
+          <div className="row">
+            <div className="col">
+              <table id="song-list">
+                <colgroup>
+                  <col id="song-number-column" />
+                  <col id="song-title-column" />
+                  <col id="song-duration-column" />
+                </colgroup>
+                <tbody>
+                {this.state.album.songs.map( (song, index) =>
+                  <tr className="song" key={index} onClick={() => this.handleSongClick(song)} onMouseEnter={() => this.handleMouseEnter(song, index)} onMouseLeave={() => this.handleMouseLeave(song, index)}>
+                   {this.renderIcons(song, index)}
+                   <td className="song-title">{song.title}</td>
+                   <td className="song-duration">{this.formatTime(song.duration)}</td>
+                  </tr>
+                )}
+                </tbody>
+              </table>
+            </div>
+            <div className="col">
+              <img id="album-cover-art" src={this.state.album.albumCover} alt={this.state.album.title}/>
+            </div>
+          </div>
+        </div>
         </section>
-        <table id="song-list">
-          <colgroup>
-            <col id="song-number-column" />
-            <col id="song-title-column" />
-            <col id="song-duration-column" />
-          </colgroup>
-          <tbody>
-          {this.state.album.songs.map( (song, index) =>
-            <tr className="song" key={index} onClick={() => this.handleSongClick(song)} onMouseEnter={() => this.handleMouseEnter(song, index)} onMouseLeave={() => this.handleMouseLeave(song, index)}>
-             {this.renderIcons(song, index)}
-             <td className="song-title">{song.title}</td>
-             <td className="song-duration">{this.formatTime(song.duration)}</td>
-            </tr>
-          )}
-          </tbody>
-        </table>
         <PlayerBar
           isPlaying={this.state.isPlaying}
           currentSong={this.state.currentSong}

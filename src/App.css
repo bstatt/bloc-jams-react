@@ -26,3 +26,40 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.card-img-top {
+  width: 235px;
+}
+
+.album-info {
+  display: block;
+}
+
+.library {
+  background: #fdcc52;
+  padding-top: 50px;
+  padding-bottom: 100px;
+}
+
+.jumbotron {
+  background: url(https://images.pexels.com/photos/532563/pexels-photo-532563.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
+  color: white;
+  text-align: left;
+}
+
+.selling-points {
+  background: #fdcc52;
+  padding: 50px;
+  margin-top: -35px;
+}
+
+.btn-jumbotron {
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+}
+
+.btn-jumbotron:hover {
+  background: #fdcc52;
+  color: white;
+}
