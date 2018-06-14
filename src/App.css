@@ -87,3 +87,21 @@ header {
 .jumbotron .container {
   margin-top: 100px;
 }
+
+.ion-music-note {
+  font-size: 40px;
+}
+
+.ion-speakerphone {
+  font-size: 40px;
+}
+
+.ion-iphone {
+  font-size: 40px;
+}
+
+a.nav-link {
+  color: white;
+  text-decoration: none;
+  font-size: 24px;
+}

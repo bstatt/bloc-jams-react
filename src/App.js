@@ -10,8 +10,9 @@ class App extends Component {
     return (
       <div className="App">
         <header>
-          <nav className="nav justify-content-end">
-            <Link to='/' className="nav-link active">Home</Link>
+          <nav className="nav justify-content-start">
+            <Link to='/' className="nav-link active" id="logo">BL<span className="ion-disc
+"></span>C Jams</Link>
             <Link to='/library' className="nav-link">Library</Link>
           </nav>
         </header>
