@@ -138,7 +138,7 @@ class Album extends Component {
     if(this.state.isPlaying && this.state.currentSong === song) {
       return <td className="ion-pause"></td>;
       //if the current song is not playing, show a play icon
-    } else if(!this.state.isPlaying && !this.state.currentSong === song || hoverStatus){
+    } else if((!this.state.isPlaying && !this.state.currentSong === song) || hoverStatus){
       return <td className="ion-play"></td>;
       //otherwise, show the song number
     } else {
@@ -163,8 +163,8 @@ class Album extends Component {
             <PlayerBar className="player-bar"
               isPlaying={this.state.isPlaying}
               currentSong={this.state.currentSong}
-              currentTime={this.audioElement.currentTime}
-              duration={this.audioElement.duration}
+              currentTime={this.state.currentTime}
+              duration={this.state.duration}
               currentVolume={this.audioElement.currentVolume}
               handleSongClick={() => this.handleSongClick(this.state.currentSong)}
               handlePrevClick={() => this.handlePrevClick()}
